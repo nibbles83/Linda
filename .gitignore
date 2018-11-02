@@ -3,10 +3,13 @@ src/qt/locale/*.qm
 /bin/
 release/
 debug/
+
 *.P
 *.o
 *.d
 .*
+.circleci/run-build-locally.sh
+!.circleci/
 src/Lindad
 .vscode/
 .vs/
