@@ -10,7 +10,7 @@
 #include "serialize.h"
 #include "sync.h"
 #include "wallet.h"
-
+#include <boost/version.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
 
@@ -364,7 +364,8 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             ssKey >> hash;
             CWalletTx& wtx = pwallet->mapWallet[hash];
             ssValue >> wtx;
-            if (wtx.CheckTransaction() && (wtx.GetHash() == hash))
+            CValidationState state;
+            if (wtx.CheckTransaction(state) && (wtx.GetHash() == hash))
                 wtx.BindWallet(pwallet);
             else
             {
@@ -406,7 +407,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         if (strType == "sxAddr")
         {
             if (fDebug)
-                printf("WalletDB ReadKeyValue sxAddr\n");
+                LogPrintf("WalletDB ReadKeyValue sxAddr\n");
             
             CStealthAddress sxAddr;
             ssValue >> sxAddr;
@@ -541,7 +542,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         else if (strType == "sxKeyMeta")
         {
             if (fDebug)
-                printf("WalletDB ReadKeyValue sxKeyMeta\n");
+                LogPrintf("WalletDB ReadKeyValue sxKeyMeta\n");
             
             CKeyID keyId;
             ssKey >> keyId;
