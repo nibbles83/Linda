@@ -92,12 +92,19 @@ jobs:
             cat static.build makefile.unix > makefile_static.unix
             make -f makefile_static.unix STATIC=1
             strip ./Lindad
-
 workflows:
   version: 2
-  build_lindad:
+  commits:
     jobs:
-      - build:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "00 12 * * *"
           filters:
             branches:
-              only: V3.2.0.0-dev
+              only:
+                - master
+                - /(v|V)\d.\d.\d.\d.*/
+    jobs:
+      - build
