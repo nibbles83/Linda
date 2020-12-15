@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2015-2018 The Bitcoin Core developers
+# Copyright (c) 2015-2019 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test multiple RPC users."""
@@ -35,6 +35,7 @@ def call_with_auth(node, user, password):
 class HTTPBasicsTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
+        self.supports_cli = False
 
     def setup_chain(self):
         super().setup_chain()
@@ -62,11 +63,11 @@ class HTTPBasicsTest(BitcoinTestFramework):
         rpcauth3 = lines[1]
         self.password = lines[3]
 
-        with open(os.path.join(get_datadir_path(self.options.tmpdir, 0), "metrix.conf"), 'a', encoding='utf8') as f:
+        with open(os.path.join(get_datadir_path(self.options.tmpdir, 0), "qtum.conf"), 'a', encoding='utf8') as f:
             f.write(rpcauth+"\n")
             f.write(rpcauth2+"\n")
             f.write(rpcauth3+"\n")
-        with open(os.path.join(get_datadir_path(self.options.tmpdir, 1), "metrix.conf"), 'a', encoding='utf8') as f:
+        with open(os.path.join(get_datadir_path(self.options.tmpdir, 1), "qtum.conf"), 'a', encoding='utf8') as f:
             f.write("rpcuser={}\n".format(self.rpcuser))
             f.write("rpcpassword={}\n".format(self.rpcpassword))
 

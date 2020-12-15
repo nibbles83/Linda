@@ -6,7 +6,7 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import assert_equal
-from test_framework.metrix import convert_btc_address_to_qtum
+from test_framework.qtum import convert_btc_address_to_qtum
 
 class SignMessagesTest(BitcoinTestFramework):
     def set_test_params(self):

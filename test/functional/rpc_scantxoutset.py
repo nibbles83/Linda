@@ -6,7 +6,7 @@
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 from test_framework.qtumconfig import COINBASE_MATURITY
-from test_framework.metrix import convert_btc_address_to_qtum
+from test_framework.qtum import convert_btc_address_to_qtum
 
 from decimal import Decimal
 import shutil
@@ -56,7 +56,7 @@ class ScantxoutsetTest(BitcoinTestFramework):
 
         self.log.info("Stop node, remove wallet, mine again some blocks...")
         self.stop_node(0)
-        shutil.rmtree(os.path.join(self.nodes[0].datadir, "regtest", 'wallets'))
+        shutil.rmtree(os.path.join(self.nodes[0].datadir, self.chain, 'wallets'))
         self.start_node(0)
         self.nodes[0].generate(110)
 

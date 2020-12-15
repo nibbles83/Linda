@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2016-2019 The Metrix Core developers
+# Copyright (c) 2016-2019 The Qtum Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.metrix import *
+from test_framework.qtum import *
 from test_framework.qtumconfig import *
 import sys
 import io

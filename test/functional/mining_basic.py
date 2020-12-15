@@ -43,6 +43,7 @@ class MiningTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
+        self.supports_cli = False
 
     def mine_chain(self):
         self.log.info('Create some old blocks')
@@ -69,7 +70,7 @@ class MiningTest(BitcoinTestFramework):
         self.log.info('getmininginfo')
         mining_info = node.getmininginfo()
         assert_equal(mining_info['blocks'], 600)
-        assert_equal(mining_info['chain'], 'regtest')
+        assert_equal(mining_info['chain'], self.chain)
         assert 'currentblocktx' not in mining_info
         assert 'currentblockweight' not in mining_info
         assert_equal(mining_info['difficulty']['proof-of-work'], Decimal('4.656542373906925E-10'))
@@ -224,7 +225,7 @@ class MiningTest(BitcoinTestFramework):
         bad_block2.solve()
         assert_raises_rpc_error(-25, 'bad-prevblk', lambda: node.submitheader(hexdata=CBlockHeader(bad_block2).serialize().hex()))
 
-        # Should reject invalid header right away, only applies to PoS blocks in metrix.
+        # Should reject invalid header right away, only applies to PoS blocks in qtum.
         #bad_block_time = copy.deepcopy(block)
         #bad_block_time.nTime = 1
         #bad_block_time.solve()

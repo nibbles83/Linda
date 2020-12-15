@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from test_framework.test_framework import BitcoinTestFramework
-from test_framework.metrix import activate_mpos
+from test_framework.qtum import activate_mpos
 from test_framework.qtumconfig import COINBASE_MATURITY
 from test_framework.address import byte_to_base58
 from test_framework.messages import hash256
@@ -12,7 +12,7 @@ class QtumCallContractTimestampTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
-        self.extra_args = [[]]
+        self.extra_args = [['-lastmposheight=999999']]
 
     def skip_test_if_missing_module(self):
         self.skip_if_no_wallet()
